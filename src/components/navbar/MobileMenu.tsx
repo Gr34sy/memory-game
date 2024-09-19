@@ -1,7 +1,6 @@
 // styles
 import Button from "../button/Button";
 import styles from "./mobile-menu.module.css";
-// components
 
 type MobileMenuProps = {
   resume: () => void;

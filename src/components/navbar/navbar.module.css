@@ -1,0 +1,33 @@
+.navbar {
+  padding-block: 1rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo:hover {
+  cursor: pointer;
+}
+
+.list {
+  display: none;
+  list-style: none;
+
+  align-items: center;
+  gap: 1rem;
+}
+@media (min-width: 520px) {
+  .list {
+    display: flex;
+  }
+}
+
+.mobile-menu-button {
+  display: block;
+}
+@media (min-width: 520px) {
+  .mobile-menu-button {
+    display: none;
+  }
+}
