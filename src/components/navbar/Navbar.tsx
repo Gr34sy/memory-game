@@ -30,13 +30,13 @@ const Navbar = ({
 
       <ul className={styles.list}>
         <li>
-          <Button buttonType="primary" onClick={() => {}}>
+          <Button buttonType="primary" onClick={restart}>
             Restart
           </Button>
         </li>
 
         <li>
-          <Button buttonType="secondary" onClick={() => {}}>
+          <Button buttonType="secondary" onClick={newGame}>
             New Game
           </Button>
         </li>

@@ -2,11 +2,16 @@
 import styles from "./gamepage.module.css";
 // types
 import { settings } from "../../types/settingsTypes";
+import { player, gamefield, turn } from "../../types/gameTypes";
 // components
 import Navbar from "../navbar/Navbar";
+import Overlay from "../overlay/Overlay";
+import StartWindow from "../start-window/StartWindow";
 // hooks
 import { useState } from "react";
-import Overlay from "../overlay/Overlay";
+// utils
+import generateBoard from "../../utils/generateBoard";
+import generatePlayers from "../../utils/generatePlayers";
 
 const Gamepage = () => {
   // overlay management
@@ -25,25 +30,56 @@ const Gamepage = () => {
     theme: "random",
     board: "g4",
   } as settings;
-  const [settings, setSettings] = useState(INITIAL_SETTINGS);
+  const [settings, setSettings] = useState<settings>(INITIAL_SETTINGS);
 
   // game
-  const [players, setPlayers] = useState([]);
-  const [board, setBoard] = useState([]);
+  const [players, setPlayers] = useState<player[]>([]);
+  const [board, setBoard] = useState<gamefield[]>([]);
   const INITIAL_TURN = {
     player: 0,
     firstActiveField: null,
     secondActiveField: null,
-  };
-  const [turn, setTurn] = useState(INITIAL_TURN);
-  const [pairsLeft, setPairsLeft] = useState(0);
+  } as turn;
+  const [turn, setTurn] = useState<turn>(INITIAL_TURN);
+  const [pairsLeft, setPairsLeft] = useState<number>(0);
 
   // functions handling the game start
   function restart() {}
 
-  function newGame() {}
+  function newGame() {
+    setOverlayContent(
+      <StartWindow
+        setSettings={setSettings}
+        setShowOverlay={setShowOverlay}
+        startGame={startGame}
+      />
+    );
+    setShowOverlay(true);
+  }
 
   // functions handling the gameplay
+  function startGame(settings: settings) {
+    const board = generateBoard(settings.theme, settings.board);
+    const players = generatePlayers(
+      settings.players.amount,
+      settings.players.names
+    );
+
+    console.log(players);
+    console.log(board);
+  }
+
+  // if (!board || !pairsLeft) {
+  //   return (
+  //     <main className={`${styles.layout} ${styles["game-start"]}`}>
+  //       <StartWindow
+  //         setSettings={setSettings}
+  //         setShowOverlay={setShowOverlay}
+  //         startGame={startGame}
+  //       />
+  //     </main>
+  //   );
+  // }
 
   return (
     <div>

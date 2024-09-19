@@ -1,0 +1,18 @@
+.box {
+  display: grid;
+  gap: 0.8rem;
+}
+
+.label {
+  font-size: 1.1rem;
+  color: var(--color-dark-grey);
+}
+
+.container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(95px, 1fr));
+  gap: 0.5rem;
+}
+.container-big-items {
+  grid-template-columns: repeat(auto-fit, minmax(165px, 1fr));
+}
