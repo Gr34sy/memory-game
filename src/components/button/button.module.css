@@ -1,0 +1,54 @@
+.button {
+  font-family: var(--font);
+  font-weight: 700;
+  color: var(--color-white);
+
+  border: none;
+  border-radius: 35px;
+  transition: 0.3s linear;
+  padding: 0.6em 1.2em;
+}
+.button:hover {
+  cursor: pointer;
+}
+
+/* primary */
+.button--primary {
+  font-size: 1.1rem;
+  background-color: var(--color-orange);
+}
+.button--primary:hover {
+  background-color: var(--color-light-orange);
+}
+
+/* secondary */
+.button--secondary {
+  font-size: 1.1rem;
+  color: var(--color-dark-blue);
+  background-color: var(--color-whitesmoke);
+}
+.button--secondary:hover {
+  color: var(--color-white);
+  background-color: var(--color-blue);
+}
+
+/* selection */
+.button--selection {
+  font-size: 1.4rem;
+  background-color: var(--color-grey);
+}
+.button--selection.active {
+  background-color: var(--color-dark-blue);
+}
+.button--selection:hover {
+  background-color: var(--color-blue);
+}
+
+/* menu */
+.button--big {
+  font-size: 1.7rem;
+  background-color: var(--color-orange);
+}
+.button--big:hover {
+  background-color: var(--color-light-orange);
+}
