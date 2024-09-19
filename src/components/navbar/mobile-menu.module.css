@@ -1,0 +1,10 @@
+.mobile-menu {
+  display: grid;
+  gap: 1rem;
+}
+
+@media (min-width: 520px) {
+  .mobile-menu {
+    display: none;
+  }
+}

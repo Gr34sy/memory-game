@@ -1,0 +1,30 @@
+.overlay {
+  position: absolute;
+  width: 100%;
+  min-height: 100vh;
+  background-color: var(--color-black-opacity);
+
+  z-index: 1;
+
+  display: grid;
+  align-items: center;
+  padding-block: 2rem;
+}
+
+.overlay-window {
+  z-index: 1;
+  background-color: var(--color-white);
+  width: min(100% - 1.5rem, 700px);
+  margin-inline: auto;
+
+  border-radius: 1rem;
+}
+
+.overlay-padding {
+  padding: 0.8rem;
+}
+@media (min-width: 300px) {
+  .overlay-padding {
+    padding: 2rem;
+  }
+}

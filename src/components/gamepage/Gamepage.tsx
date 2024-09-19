@@ -1,14 +1,25 @@
+// styles
 import styles from "./gamepage.module.css";
+// components
+import Navbar from "../navbar/Navbar";
+// hooks
+import { useState } from "react";
+import Overlay from "../overlay/Overlay";
 
 const Gamepage = () => {
-  return <div>
+  const INITIAL_CONTENT = <div></div>;
+  const [overlayContent, setOverlayContent] = useState(INITIAL_CONTENT);
+  const [showOverlay, setShowOverlay] = useState(false);
 
-    <main className={styles.layout}>
+  return (
+    <div>
+      <Navbar />
 
-    </main>
+      <main className={styles.layout}></main>
 
-    
-  </div>;
+      {showOverlay && <Overlay>{overlayContent}</Overlay>}
+    </div>
+  );
 };
 
 export default Gamepage;
