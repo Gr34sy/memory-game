@@ -117,7 +117,7 @@ function generateBoard(theme: themes, boardSize: boardSize): board {
   });
 
   return {
-    fieldSize: boardSize === "g6" ? "small" : "big",
+    fieldSize: boardSize === "g6" ? "big" : "small",
     fields: board.map((field) => {
       return {
         name: field,

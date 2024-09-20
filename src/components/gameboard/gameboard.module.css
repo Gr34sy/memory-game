@@ -9,12 +9,12 @@
   aspect-ratio: 1;
 }
 
-.gameboard.g4 {
+.gameboard.small {
   width: min(100%, 480px);
 
   grid-template-columns: repeat(4, 1fr);
 }
-.gameboard.g6 {
+.gameboard.big {
   width: min(100%, 580px);
   grid-template-columns: repeat(6, 1fr);
 }

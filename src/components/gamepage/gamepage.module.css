@@ -1,0 +1,13 @@
+.layout {
+  min-height: 99dvh;
+  width: min(100% - 1.5rem, 1600px);
+  margin-inline: auto;
+
+  display: grid;
+  align-items: center;
+  grid-template-rows: auto 1fr auto;
+}
+
+.layout.game-start {
+  grid-template-rows: 1fr;
+}

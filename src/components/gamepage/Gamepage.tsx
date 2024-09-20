@@ -67,24 +67,29 @@ const Gamepage = () => {
       settings.players.names
     );
 
-    console.log(players);
-    console.log(board);
+    setPlayers(players);
+    setBoard(board);
+    setPairsLeft(board.fields.length / 2);
   }
 
-  // if (!board || !pairsLeft) {
-  //   return (
-  //     <main className={`${styles.layout} ${styles["game-start"]}`}>
-  //       <StartWindow
-  //         setSettings={setSettings}
-  //         setShowOverlay={setShowOverlay}
-  //         startGame={startGame}
-  //       />
-  //     </main>
-  //   );
-  // }
+  function onFieldClick() {
+    return {};
+  }
+
+  if (!board || !pairsLeft) {
+    return (
+      <main className={`${styles.layout} ${styles["game-start"]}`}>
+        <StartWindow
+          setSettings={setSettings}
+          setShowOverlay={setShowOverlay}
+          startGame={startGame}
+        />
+      </main>
+    );
+  }
 
   return (
-    <div>
+    <div className={styles.layout}>
       <Navbar
         setShowOverlay={setShowOverlay}
         setOverlayContent={setOverlayContent}
@@ -92,9 +97,13 @@ const Gamepage = () => {
         newGame={newGame}
       />
 
-      <main className={styles.layout}>
-        <Gameboard board={board} />
+      <main>
+        <Gameboard board={board} onFieldClick={onFieldClick} />
       </main>
+
+      <div>
+        gamepanel
+      </div>
 
       {showOverlay && <Overlay>{overlayContent}</Overlay>}
     </div>

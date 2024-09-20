@@ -8,7 +8,7 @@ type GameboardProps = {
 };
 const Gameboard = ({ board, onFieldClick }: GameboardProps) => {
   return (
-    <div className={`${styles.gameboard} ${styles[board.fieldSize]}`}>
+    <main className={`${styles.gameboard} ${styles[board.fieldSize]}`}>
       {board.fields.map((field, i) => (
         <GameField
           size={board.fieldSize}
@@ -18,7 +18,7 @@ const Gameboard = ({ board, onFieldClick }: GameboardProps) => {
           onClick={onFieldClick}
         />
       ))}
-    </div>
+    </main>
   );
 };
 
