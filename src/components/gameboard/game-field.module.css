@@ -1,0 +1,65 @@
+.gamefield {
+  border-radius: 50%;
+
+  color: var(--color-white);
+  transition: 0.3s ease-in-out;
+  padding: 0.2em;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.gamefield.small {
+  font-size: 1.2rem;
+}
+.gamefield.big {
+  font-size: 1.9rem;
+}
+
+@media (min-width: 300px) {
+  .gamefield.small {
+    font-size: 1.4rem;
+  }
+  .gamefield.big {
+    font-size: 2.2rem;
+  }
+}
+@media (min-width: 425px) {
+  .gamefield.small {
+    font-size: 2rem;
+  }
+  .gamefield.big {
+    font-size: 3.1rem;
+  }
+}
+@media (min-width: 600px) {
+  .gamefield.small {
+    font-size: 2.6rem;
+  }
+
+  .gamefield.big {
+    font-size: 3.4rem;
+  }
+}
+
+/* undiscovered status */
+.gamefield.undiscovered {
+  background-color: var(--color-dark-blue);
+}
+.gamefield.undiscovered:hover {
+  cursor: pointer;
+  background-color: var(--color-blue);
+}
+
+/* active status */
+.gamefield.active {
+  cursor: default;
+  background-color: var(--color-orange);
+}
+
+/* disabled status */
+.gamefield.disabled {
+  cursor: default;
+  background-color: var(--color-grey);
+}

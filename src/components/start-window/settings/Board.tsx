@@ -1,13 +1,13 @@
 // types
-import { board } from "../../../types/settingsTypes";
+import { boardSize } from "../../../types/settingsTypes";
 import { Dispatch, SetStateAction } from "react";
 // components
 import SettingsBox from "./settings-box/SettingsBox";
 import Button from "../../button/Button";
 
 type BoardProps = {
-  setBoard: Dispatch<SetStateAction<board>>;
-  currentBoard: board;
+  setBoard: Dispatch<SetStateAction<boardSize>>;
+  currentBoard: boardSize;
 };
 
 const Board = ({ setBoard, currentBoard }: BoardProps) => {

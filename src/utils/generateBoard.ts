@@ -13,8 +13,8 @@ import numberIcons from "../assets/icons/numbers";
 
 // utils
 import generateRandomNum from "./generateRandomNum";
-import { board, themes } from "../types/settingsTypes";
-import { gamefield } from "../types/gameTypes";
+import { boardSize, themes } from "../types/settingsTypes";
+import { board } from "../types/gameTypes";
 
 function getIcons(theme: themes) {
   let icons;
@@ -84,8 +84,8 @@ function getIcons(theme: themes) {
   return icons;
 }
 
-function generateBoard(theme: themes, boardType: board): gamefield[] {
-  const arraySize = Math.pow(Number(boardType.slice(1)), 2);
+function generateBoard(theme: themes, boardSize: boardSize): board {
+  const arraySize = Math.pow(Number(boardSize.slice(1)), 2);
 
   // getting the icon set
   let icons = getIcons(theme);
@@ -116,12 +116,15 @@ function generateBoard(theme: themes, boardType: board): gamefield[] {
     avialablePositions = avialablePositions.filter((pos) => pos !== pos2);
   });
 
-  return board.map((field) => {
-    return {
-      name: field,
-      status: "undiscovered",
-    };
-  });
+  return {
+    fieldSize: boardSize === "g6" ? "small" : "big",
+    fields: board.map((field) => {
+      return {
+        name: field,
+        status: "undiscovered",
+      };
+    }),
+  };
 }
 
 export default generateBoard;

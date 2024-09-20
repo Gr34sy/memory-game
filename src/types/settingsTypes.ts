@@ -19,7 +19,7 @@ export type themes =
   | "medicine"
   | "military";
 
-export type board = "g4" | "g6";
+export type boardSize = "g4" | "g6";
 
 export type settings = {
   players: {
@@ -27,5 +27,5 @@ export type settings = {
     names: playerNames;
   };
   theme: themes;
-  board: board;
+  boardSize: boardSize;
 };

@@ -11,6 +11,11 @@ export type gamefield = {
   status: gamefieldStatus;
 };
 
+export type board = {
+  fieldSize: "big" | "small";
+  fields: gamefield[];
+};
+
 export type player = {
   name: string;
   pairs: number;

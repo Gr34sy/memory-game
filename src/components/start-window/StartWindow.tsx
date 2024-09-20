@@ -5,7 +5,7 @@ import {
   playerAmount,
   playerNames,
   themes,
-  board,
+  boardSize,
   settings,
 } from "../../types/settingsTypes";
 
@@ -34,7 +34,7 @@ const StartWindow = ({
   const [playerAmountSettings, setPlayerAmountSettings] =
     useState<playerAmount>(1);
   const [themeSettings, setTheme] = useState<themes>("numbers");
-  const [boardSettings, setBoardSettings] = useState<board>("g4");
+  const [boardSettings, setBoardSettings] = useState<boardSize>("g4");
 
   function handleNameChange(e: React.ChangeEvent<HTMLInputElement>) {
     e.preventDefault();
@@ -77,7 +77,7 @@ const StartWindow = ({
               amount: playerAmountSettings,
               names: playerNamesSettings,
             },
-            board: boardSettings,
+            boardSize: boardSettings,
           };
           setSettings(settings);
           startGame(settings);

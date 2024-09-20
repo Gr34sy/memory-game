@@ -2,7 +2,7 @@
 import styles from "./gamepage.module.css";
 // types
 import { settings } from "../../types/settingsTypes";
-import { player, gamefield, turn } from "../../types/gameTypes";
+import { player, gamefield, turn, board } from "../../types/gameTypes";
 // components
 import Navbar from "../navbar/Navbar";
 import Overlay from "../overlay/Overlay";
@@ -12,6 +12,7 @@ import { useState } from "react";
 // utils
 import generateBoard from "../../utils/generateBoard";
 import generatePlayers from "../../utils/generatePlayers";
+import Gameboard from "../gameboard/Gameboard";
 
 const Gamepage = () => {
   // overlay management
@@ -28,13 +29,14 @@ const Gamepage = () => {
       },
     },
     theme: "random",
-    board: "g4",
+    boardSize: "g4",
   } as settings;
   const [settings, setSettings] = useState<settings>(INITIAL_SETTINGS);
 
   // game
   const [players, setPlayers] = useState<player[]>([]);
-  const [board, setBoard] = useState<gamefield[]>([]);
+  const INITIAL_BOARD = { fieldSize: "big", fields: [] } as board;
+  const [board, setBoard] = useState<board>(INITIAL_BOARD);
   const INITIAL_TURN = {
     player: 0,
     firstActiveField: null,
@@ -59,7 +61,7 @@ const Gamepage = () => {
 
   // functions handling the gameplay
   function startGame(settings: settings) {
-    const board = generateBoard(settings.theme, settings.board);
+    const board = generateBoard(settings.theme, settings.boardSize);
     const players = generatePlayers(
       settings.players.amount,
       settings.players.names
@@ -90,7 +92,9 @@ const Gamepage = () => {
         newGame={newGame}
       />
 
-      <main className={styles.layout}></main>
+      <main className={styles.layout}>
+        <Gameboard board={board} />
+      </main>
 
       {showOverlay && <Overlay>{overlayContent}</Overlay>}
     </div>
