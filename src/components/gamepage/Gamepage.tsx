@@ -2,13 +2,13 @@
 import styles from "./gamepage.module.css";
 // types
 import { settings } from "../../types/settingsTypes";
-import { player, gamefield, turn, board } from "../../types/gameTypes";
+import { player, turn, board } from "../../types/gameTypes";
 // components
 import Navbar from "../navbar/Navbar";
 import Overlay from "../overlay/Overlay";
 import StartWindow from "../start-window/StartWindow";
 // hooks
-import { useState } from "react";
+import { useState, useEffect } from "react";
 // utils
 import generateBoard from "../../utils/generateBoard";
 import generatePlayers from "../../utils/generatePlayers";
@@ -46,6 +46,63 @@ const Gamepage = () => {
   const [turn, setTurn] = useState<turn>(INITIAL_TURN);
   const [pairsLeft, setPairsLeft] = useState<number>(0);
 
+  useEffect(() => {
+    if (turn.firstActiveField !== null && turn.secondActiveField !== null) {
+      const timeout = setTimeout(() => {
+        const firstField = turn.firstActiveField as number;
+        const secondField = turn.secondActiveField as number;
+
+        if (board.fields[firstField].name === board.fields[secondField].name) {
+          setBoard((prevBoard) => {
+            const fields = prevBoard.fields;
+
+            fields[firstField] = {
+              ...fields[firstField],
+              status: "disabled",
+            };
+            fields[secondField] = {
+              ...fields[secondField],
+              status: "disabled",
+            };
+
+            return {
+              fieldSize: prevBoard.fieldSize,
+              fields: fields,
+            };
+          });
+        } else {
+          setBoard((prevBoard) => {
+            const fields = prevBoard.fields;
+
+            fields[firstField] = {
+              ...fields[firstField],
+              status: "undiscovered",
+            };
+            fields[secondField] = {
+              ...fields[secondField],
+              status: "undiscovered",
+            };
+
+            return {
+              fieldSize: prevBoard.fieldSize,
+              fields: fields,
+            };
+          });
+        }
+
+        setTurn((prevTurn) => {
+          return {
+            ...prevTurn,
+            firstActiveField: null,
+            secondActiveField: null,
+          };
+        });
+      }, 2000);
+
+      return () => clearTimeout(timeout);
+    }
+  }, [turn]);
+
   // functions handling the game start
   function restart() {}
 
@@ -60,7 +117,7 @@ const Gamepage = () => {
     setShowOverlay(true);
   }
 
-  // functions handling the gameplay
+  // functionwhich starts the game
   function startGame(settings: settings) {
     const board = generateBoard(settings.theme, settings.boardSize);
     const players = generatePlayers(
@@ -73,8 +130,37 @@ const Gamepage = () => {
     setPairsLeft(board.fields.length / 2);
   }
 
-  function onFieldClick() {
-    return {};
+  // function which handles field click
+  function onFieldClick(fieldId: number) {
+    if (turn.firstActiveField === null || turn.secondActiveField === null) {
+      setBoard((prevBoard) => {
+        const fields = prevBoard.fields;
+
+        fields[fieldId] = {
+          ...fields[fieldId],
+          status: "active",
+        };
+
+        return {
+          fieldSize: prevBoard.fieldSize,
+          fields: fields,
+        };
+      });
+    }
+
+    if (turn.firstActiveField === null) {
+      setTurn((prevTurn) => ({
+        ...prevTurn,
+        firstActiveField: fieldId,
+      }));
+    } else if (turn.secondActiveField === null) {
+      setTurn((prevTurn) => ({
+        ...prevTurn,
+        secondActiveField: fieldId,
+      }));
+    } else {
+      return;
+    }
   }
 
   if (!board || !pairsLeft) {
@@ -84,6 +170,7 @@ const Gamepage = () => {
           setSettings={setSettings}
           setShowOverlay={setShowOverlay}
           startGame={startGame}
+          hideBackBtn
         />
       </main>
     );

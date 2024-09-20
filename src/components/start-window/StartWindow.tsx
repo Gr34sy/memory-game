@@ -21,12 +21,14 @@ type StartWindowProps = {
   setShowOverlay: React.Dispatch<React.SetStateAction<boolean>>;
   setSettings: React.Dispatch<React.SetStateAction<settings>>;
   startGame: (settings: settings) => void;
+  hideBackBtn?: boolean;
 };
 
 const StartWindow = ({
   setSettings,
   setShowOverlay,
   startGame,
+  hideBackBtn,
 }: StartWindowProps) => {
   const INITIAL_PLAYER_NAMES = { p1: "", p2: "", p3: "", p4: "" };
   const [playerNamesSettings, setPlayerNamesSettings] =
@@ -46,15 +48,17 @@ const StartWindow = ({
 
   return (
     <form className={styles.grid}>
-      <button
-        className="back-button"
-        onClick={(e) => {
-          e.preventDefault();
-          setShowOverlay(false);
-        }}
-      >
-        Back
-      </button>
+      {!hideBackBtn && (
+        <button
+          className="back-button"
+          onClick={(e) => {
+            e.preventDefault();
+            setShowOverlay(false);
+          }}
+        >
+          Back
+        </button>
+      )}
 
       <Theme setTheme={setTheme} />
 

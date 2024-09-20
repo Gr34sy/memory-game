@@ -4,7 +4,7 @@ import GameField from "./GameField";
 
 type GameboardProps = {
   board: board;
-  onFieldClick: () => {};
+  onFieldClick(fieldId: number): void;
 };
 const Gameboard = ({ board, onFieldClick }: GameboardProps) => {
   return (
@@ -15,7 +15,7 @@ const Gameboard = ({ board, onFieldClick }: GameboardProps) => {
           content={field.name}
           status={field.status}
           key={`gamefield-${i}`}
-          onClick={onFieldClick}
+          onClick={() => onFieldClick(i)}
         />
       ))}
     </main>

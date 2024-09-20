@@ -1,6 +1,6 @@
 .gamepanel {
   display: grid;
-  width: min(100%, 1400px);
+  width: min(100%, 1300px);
   margin-inline: auto;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   justify-content: center;
