@@ -13,6 +13,7 @@ import { useState } from "react";
 import generateBoard from "../../utils/generateBoard";
 import generatePlayers from "../../utils/generatePlayers";
 import Gameboard from "../gameboard/Gameboard";
+import Gamepanel from "../gamepanel/Gamepanel";
 
 const Gamepage = () => {
   // overlay management
@@ -101,9 +102,7 @@ const Gamepage = () => {
         <Gameboard board={board} onFieldClick={onFieldClick} />
       </main>
 
-      <div>
-        gamepanel
-      </div>
+      <Gamepanel players={players} activePlayer={players[turn.player]} />
 
       {showOverlay && <Overlay>{overlayContent}</Overlay>}
     </div>

@@ -1,0 +1,10 @@
+.gamepanel {
+  display: grid;
+  width: min(100%, 1400px);
+  margin-inline: auto;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  justify-content: center;
+  gap: 0.8rem;
+
+  padding-block: 1.5rem;
+}
