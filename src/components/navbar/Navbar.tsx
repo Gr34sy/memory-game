@@ -10,14 +10,14 @@ type NavbarProps = {
   setOverlayContent: React.Dispatch<React.SetStateAction<JSX.Element>>;
   setShowOverlay: React.Dispatch<React.SetStateAction<boolean>>;
   restart: () => void;
-  newGame: () => void;
+  displayStartWindow: () => void;
 };
 
 const Navbar = ({
   setOverlayContent,
   setShowOverlay,
   restart,
-  newGame,
+  displayStartWindow,
 }: NavbarProps) => {
   return (
     <nav className={styles.navbar}>
@@ -36,7 +36,7 @@ const Navbar = ({
         </li>
 
         <li>
-          <Button buttonType="secondary" onClick={newGame}>
+          <Button buttonType="secondary" onClick={displayStartWindow}>
             New Game
           </Button>
         </li>
@@ -52,7 +52,7 @@ const Navbar = ({
                   setShowOverlay(false);
                 }}
                 restart={restart}
-                newGame={newGame}
+                newGame={displayStartWindow}
               />
             );
             setShowOverlay(true);

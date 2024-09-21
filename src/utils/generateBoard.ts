@@ -14,7 +14,7 @@ import numberIcons from "../assets/icons/numbers";
 // utils
 import generateRandomNum from "./generateRandomNum";
 import { boardSize, themes } from "../types/settingsTypes";
-import { board } from "../types/gameTypes";
+import { gamefield } from "../types/gameTypes";
 
 function getIcons(theme: themes) {
   let icons;
@@ -84,7 +84,7 @@ function getIcons(theme: themes) {
   return icons;
 }
 
-function generateBoard(theme: themes, boardSize: boardSize): board {
+function generateBoard(theme: themes, boardSize: boardSize): gamefield[] {
   const arraySize = Math.pow(Number(boardSize.slice(1)), 2);
 
   // getting the icon set
@@ -116,15 +116,12 @@ function generateBoard(theme: themes, boardSize: boardSize): board {
     avialablePositions = avialablePositions.filter((pos) => pos !== pos2);
   });
 
-  return {
-    fieldSize: boardSize === "g6" ? "big" : "small",
-    fields: board.map((field) => {
-      return {
-        name: field,
-        status: "undiscovered",
-      };
-    }),
-  };
+  return board.map((field) => {
+    return {
+      name: field,
+      status: "undiscovered",
+    };
+  });
 }
 
 export default generateBoard;

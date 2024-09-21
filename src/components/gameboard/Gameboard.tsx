@@ -1,17 +1,18 @@
 import styles from "./gameboard.module.css";
-import { board } from "../../types/gameTypes";
+import { gamefield } from "../../types/gameTypes";
 import GameField from "./GameField";
 
 type GameboardProps = {
-  board: board;
+  board: gamefield[];
+  fieldSize: "small" | "big";
   onFieldClick(fieldId: number): void;
 };
-const Gameboard = ({ board, onFieldClick }: GameboardProps) => {
+const Gameboard = ({ board, fieldSize, onFieldClick }: GameboardProps) => {
   return (
-    <main className={`${styles.gameboard} ${styles[board.fieldSize]}`}>
-      {board.fields.map((field, i) => (
+    <main className={`${styles.gameboard} ${styles[fieldSize]}`}>
+      {board.map((field, i) => (
         <GameField
-          size={board.fieldSize}
+          size={fieldSize}
           content={field.name}
           status={field.status}
           key={`gamefield-${i}`}
