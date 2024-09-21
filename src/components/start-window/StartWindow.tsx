@@ -16,6 +16,7 @@ import Players from "./settings/Players";
 import Theme from "./settings/theme/Theme";
 // hooks and utils
 import { useState } from "react";
+import avialableThemes from "../../utils/avialableThemes";
 
 type StartWindowProps = {
   setShowOverlay: React.Dispatch<React.SetStateAction<boolean>>;
@@ -35,7 +36,7 @@ const StartWindow = ({
     useState<playerNames>(INITIAL_PLAYER_NAMES);
   const [playerAmountSettings, setPlayerAmountSettings] =
     useState<playerAmount>(1);
-  const [themeSettings, setTheme] = useState<themes>("numbers");
+  const [themeSettings, setTheme] = useState<themes>(avialableThemes[0]);
   const [boardSettings, setBoardSettings] = useState<boardSize>("g4");
 
   function handleNameChange(e: React.ChangeEvent<HTMLInputElement>) {

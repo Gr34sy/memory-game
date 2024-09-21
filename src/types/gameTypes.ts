@@ -1,3 +1,5 @@
+export type gameStatus = "not-started" | "running" | "finished";
+
 export type activePlayer = 0 | 1 | 2 | 3;
 export type turn = {
   player: activePlayer;
