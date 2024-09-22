@@ -6,6 +6,7 @@
 }
 
 .box {
+  width: min(100%, 160px);
   background-color: var(--color-whitesmoke);
 
   display: flex;

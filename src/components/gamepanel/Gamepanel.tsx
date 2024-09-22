@@ -9,9 +9,16 @@ import SoloModeTiles from "./SoloModeTiles";
 type GamepanelProps = {
   players: player[];
   activePlayer: player;
+  soloModeTime: string;
+  soloModeMoves: number;
 };
 
-const Gamepanel = ({ players, activePlayer }: GamepanelProps) => {
+const Gamepanel = ({
+  players,
+  activePlayer,
+  soloModeTime,
+  soloModeMoves,
+}: GamepanelProps) => {
   return (
     <div className={styles.gamepanel}>
       {players.length > 1 &&
@@ -24,7 +31,12 @@ const Gamepanel = ({ players, activePlayer }: GamepanelProps) => {
           />
         ))}
 
-      {players.length === 1 && <SoloModeTiles />}
+      {players.length === 1 && (
+        <SoloModeTiles
+          time={soloModeTime}
+          moves={soloModeMoves}
+        />
+      )}
     </div>
   );
 };

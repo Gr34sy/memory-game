@@ -22,8 +22,6 @@ export type player = {
   name: string;
   pairs: number;
   mostPairs?: boolean;
-  moves?: number;
-  time?: string;
 };
 
 export type game = {
@@ -38,4 +36,6 @@ export type results = {
   players: player[];
   title: string;
   subtitle: string;
+  moves?: number;
+  time?: string;
 };

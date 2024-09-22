@@ -1,3 +1,4 @@
+//  styles
 import styles from "./player-tile.module.css";
 
 type PlayerTileProps = {

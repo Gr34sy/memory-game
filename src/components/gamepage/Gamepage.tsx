@@ -15,18 +15,19 @@ import Overlay from "../overlay/Overlay";
 import StartWindow from "../start-window/StartWindow";
 import Gameboard from "../gameboard/Gameboard";
 import Gamepanel from "../gamepanel/Gamepanel";
+import EndgameWindow from "../end-window/EndgameWindow";
 // hooks
 import { useState, useEffect } from "react";
 // utils
 import avialableThemes from "../../utils/avialableThemes";
 import generateBoard from "../../utils/generateBoard";
 import generatePlayers from "../../utils/generatePlayers";
+import { checkMatch, fieldClickHandler } from "../../utils/gameHandlers";
 import {
-  checkMatch,
-  fieldClickHandler,
-  getGameResults,
+  getMultiplayerResults,
+  getSinglePlayerResults,
 } from "../../utils/gameHandlers";
-import EndgameWindow from "../end-window/EndgameWindow";
+import getGameTime from "../../utils/getGameTime";
 
 const Gamepage = () => {
   // overlay management
@@ -59,6 +60,20 @@ const Gamepage = () => {
   } as turn;
   const [turn, setTurn] = useState<turn>(INITIAL_TURN);
 
+  // solo mode time and moves states
+  const [soloModeTime, setSoloModeTime] = useState(0);
+  const [soloModeMoves, setSoloModeMoves] = useState(0);
+  useEffect(() => {
+    if (gameStatus === "running" && players.length === 1) {
+      const interval = setInterval(() => {
+        if (gameStatus === "running") {
+          setSoloModeTime((prevTime) => prevTime + 1);
+        }
+      }, 1000);
+      return () => clearInterval(interval);
+    }
+  }, [gameStatus]);
+
   // function which starts the game with the given settings
   function startGame(settings: settings) {
     const board = generateBoard(settings.theme, settings.boardSize);
@@ -71,12 +86,16 @@ const Gamepage = () => {
     setBoard(board);
     setTurn(INITIAL_TURN);
     setGameStatus("running");
+    setSoloModeMoves(0);
+    setSoloModeTime(0);
   }
 
   function restart() {
     startGame(settings);
     setTurn(INITIAL_TURN);
     setShowOverlay(false);
+    setSoloModeMoves(0);
+    setSoloModeTime(0);
   }
 
   // function which handles field click
@@ -100,7 +119,15 @@ const Gamepage = () => {
   useEffect(() => {
     if (turn.firstActiveField !== null && turn.secondActiveField !== null) {
       const timeout = setTimeout(() => {
-        checkMatch(board, turn, players, setBoard, setTurn, setPlayers);
+        checkMatch(
+          board,
+          turn,
+          players,
+          setBoard,
+          setTurn,
+          setPlayers,
+          setSoloModeMoves
+        );
       }, 3000);
 
       return () => clearTimeout(timeout);
@@ -114,8 +141,15 @@ const Gamepage = () => {
     );
 
     if (undiscoveredFields.length < 1 && board.length > 0) {
+      let results: results;
+      if (players.length === 1) {
+        results = getSinglePlayerResults([...players]);
+        results.time = getGameTime(soloModeTime);
+        results.moves = soloModeMoves;
+      } else {
+        results = getMultiplayerResults([...players]);
+      }
       setGameStatus("finished");
-      const results: results = getGameResults([...players]);
 
       const timeout = setTimeout(() => {
         setOverlayContent(
@@ -126,7 +160,7 @@ const Gamepage = () => {
           />
         );
         setShowOverlay(true);
-      }, 5000);
+      }, 3000);
       return () => clearTimeout(timeout);
     }
   }, [board]);
@@ -159,7 +193,12 @@ const Gamepage = () => {
         onFieldClick={gameStatus === "running" ? onFieldClick : () => {}}
       />
 
-      <Gamepanel players={players} activePlayer={players[turn.player]} />
+      <Gamepanel
+        players={players}
+        activePlayer={players[turn.player]}
+        soloModeTime={getGameTime(soloModeTime)}
+        soloModeMoves={soloModeMoves}
+      />
 
       {showOverlay && <Overlay>{overlayContent}</Overlay>}
     </div>

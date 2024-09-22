@@ -44,7 +44,8 @@ export function checkMatch(
   players: player[],
   setBoard: (value: SetStateAction<gamefield[]>) => void,
   setTurn: (value: SetStateAction<turn>) => void,
-  setPlayers: (value: SetStateAction<player[]>) => void
+  setPlayers: (value: SetStateAction<player[]>) => void,
+  setSoloModeMoves: (value: SetStateAction<number>) => void
 ): void {
   const firstField = turn.firstActiveField as number;
   const secondField = turn.secondActiveField as number;
@@ -96,6 +97,10 @@ export function checkMatch(
       };
     });
   }
+
+  if (players.length === 1) {
+    setSoloModeMoves((prevMoves) => prevMoves + 1);
+  }
 }
 
 // gets the multiplayer results
@@ -128,12 +133,4 @@ export function getSinglePlayerResults(players: player[]) {
   } as results;
 
   return results;
-}
-
-export function getGameResults(players: player[]) {
-  if (players.length === 1) {
-    return getSinglePlayerResults(players);
-  } else {
-    return getMultiplayerResults(players);
-  }
 }

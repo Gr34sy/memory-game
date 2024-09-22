@@ -16,13 +16,11 @@ const EndgameWindow = ({
   setupNewGame,
   results,
 }: EndGameWindowProps) => {
-  const playerAmount = results.players.length;
-
   return (
     <div className={styles.endgame}>
       <EndHeader title={results.title} subtitle={results.subtitle} />
 
-      {playerAmount > 1 &&
+      {results.players.length > 1 &&
         results.players.map((player, i) => {
           return (
             <EndTile
@@ -34,16 +32,10 @@ const EndgameWindow = ({
           );
         })}
 
-      {playerAmount === 1 && (
+      {results.players.length === 1 && (
         <>
-          <EndTile
-            label="Time Elapsed"
-            statistic={results.players[0].time || "00:00"}
-          />
-          <EndTile
-            label="Moves Taken"
-            statistic={`${results.players[0].moves} Moves`}
-          />
+          <EndTile label="Time Elapsed" statistic={results.time || "00:00"} />
+          <EndTile label="Moves Taken" statistic={`${results.moves} Moves`} />
         </>
       )}
 
