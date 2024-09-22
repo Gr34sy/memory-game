@@ -1,0 +1,36 @@
+.tile {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0.6rem 1rem;
+
+  border-radius: 0.6rem;
+  background-color: var(--color-whitesmoke);
+}
+.tile .label {
+  color: var(--color-dark-grey);
+}
+.tile .statistic {
+  font-size: 1.8rem;
+  color: var(--color-dark-blue);
+}
+
+.most-pairs-tile {
+  background-color: var(--color-black);
+}
+.most-pairs-tile .label {
+  color: var(--color-white);
+}
+.most-pairs-tile .statistic {
+  color: var(--color-white);
+}
+
+@media (min-width: 400px) {
+  .tile {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 1rem 2rem;
+  }
+}

@@ -1,4 +1,10 @@
-import { turn, gamefield, player, activePlayer } from "../types/gameTypes";
+import {
+  turn,
+  gamefield,
+  player,
+  activePlayer,
+  results,
+} from "../types/gameTypes";
 import { SetStateAction } from "react";
 
 // handles the gamefield click and sets up the active gamefield
@@ -31,6 +37,7 @@ export function fieldClickHandler(
   }
 }
 
+// checks if the active fields are matching and then sets up the turn and board state
 export function checkMatch(
   board: gamefield[],
   turn: turn,
@@ -88,5 +95,45 @@ export function checkMatch(
         secondActiveField: null,
       };
     });
+  }
+}
+
+// gets the multiplayer results
+export function getMultiplayerResults(players: player[]) {
+  const sortedPlayers = [...players].sort((a, b) => b.pairs - a.pairs);
+  const winners = sortedPlayers.filter(
+    (player) => player.pairs === sortedPlayers[0].pairs
+  );
+  const mappedPlayers = sortedPlayers.map((player) => {
+    if (winners.includes(player)) {
+      return { ...player, mostPairs: true };
+    }
+    return player;
+  });
+
+  const results = {
+    players: mappedPlayers,
+    title: winners.length === 1 ? `${winners[0].name} Wins!` : "It's a tie!",
+    subtitle: "Game over! Here are the results...",
+  } as results;
+
+  return results;
+}
+// gets the single player Results
+export function getSinglePlayerResults(players: player[]) {
+  const results = {
+    title: "You did it!",
+    subtitle: "Game over! Here's how you got on...",
+    players: players,
+  } as results;
+
+  return results;
+}
+
+export function getGameResults(players: player[]) {
+  if (players.length === 1) {
+    return getSinglePlayerResults(players);
+  } else {
+    return getMultiplayerResults(players);
   }
 }

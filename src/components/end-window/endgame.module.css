@@ -1,0 +1,5 @@
+.endgame {
+  display: grid;
+  grid-template-rows: repeat(3, auto);
+  gap: 1.5rem;
+}

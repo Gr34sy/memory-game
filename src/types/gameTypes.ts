@@ -21,6 +21,9 @@ export type board = {
 export type player = {
   name: string;
   pairs: number;
+  mostPairs?: boolean;
+  moves?: number;
+  time?: string;
 };
 
 export type game = {
@@ -29,4 +32,10 @@ export type game = {
   board: gamefield[];
   players: player[];
   pairsLeft: number;
+};
+
+export type results = {
+  players: player[];
+  title: string;
+  subtitle: string;
 };

@@ -2,7 +2,13 @@
 import styles from "./gamepage.module.css";
 // types
 import { settings } from "../../types/settingsTypes";
-import { player, turn, gamefield, gameStatus } from "../../types/gameTypes";
+import {
+  player,
+  turn,
+  gamefield,
+  gameStatus,
+  results,
+} from "../../types/gameTypes";
 // components
 import Navbar from "../navbar/Navbar";
 import Overlay from "../overlay/Overlay";
@@ -15,7 +21,12 @@ import { useState, useEffect } from "react";
 import avialableThemes from "../../utils/avialableThemes";
 import generateBoard from "../../utils/generateBoard";
 import generatePlayers from "../../utils/generatePlayers";
-import { checkMatch, fieldClickHandler } from "../../utils/gameHandlers";
+import {
+  checkMatch,
+  fieldClickHandler,
+  getGameResults,
+} from "../../utils/gameHandlers";
+import EndgameWindow from "../end-window/EndgameWindow";
 
 const Gamepage = () => {
   // overlay management
@@ -58,7 +69,14 @@ const Gamepage = () => {
 
     setPlayers(players);
     setBoard(board);
+    setTurn(INITIAL_TURN);
     setGameStatus("running");
+  }
+
+  function restart() {
+    startGame(settings);
+    setTurn(INITIAL_TURN);
+    setShowOverlay(false);
   }
 
   // function which handles field click
@@ -97,8 +115,17 @@ const Gamepage = () => {
 
     if (undiscoveredFields.length < 1 && board.length > 0) {
       setGameStatus("finished");
+      const results: results = getGameResults([...players]);
+
       const timeout = setTimeout(() => {
-        displayStartWindow();
+        setOverlayContent(
+          <EndgameWindow
+            results={results}
+            restart={restart}
+            setupNewGame={displayStartWindow}
+          />
+        );
+        setShowOverlay(true);
       }, 5000);
       return () => clearTimeout(timeout);
     }
@@ -122,10 +149,7 @@ const Gamepage = () => {
       <Navbar
         setShowOverlay={setShowOverlay}
         setOverlayContent={setOverlayContent}
-        restart={() => {
-          startGame(settings);
-          setShowOverlay(false);
-        }}
+        restart={restart}
         displayStartWindow={displayStartWindow}
       />
 

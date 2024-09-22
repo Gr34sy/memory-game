@@ -16,7 +16,9 @@ const Gameboard = ({ board, fieldSize, onFieldClick }: GameboardProps) => {
           content={field.name}
           status={field.status}
           key={`gamefield-${i}`}
-          onClick={() => onFieldClick(i)}
+          onClick={
+            field.status === "undiscovered" ? () => onFieldClick(i) : () => {}
+          }
         />
       ))}
     </main>
