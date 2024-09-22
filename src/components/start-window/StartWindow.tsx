@@ -86,6 +86,7 @@ const StartWindow = ({
           };
           setSettings(settings);
           startGame(settings);
+          setShowOverlay(false);
         }}
       >
         Start Game

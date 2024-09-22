@@ -48,40 +48,6 @@ const Gamepage = () => {
   } as turn;
   const [turn, setTurn] = useState<turn>(INITIAL_TURN);
 
-  // checks for match after each turn state change
-  useEffect(() => {
-    if (turn.firstActiveField !== null && turn.secondActiveField !== null) {
-      const timeout = setTimeout(() => {
-        checkMatch(board, turn, players, setBoard, setTurn, setPlayers);
-      }, 3000);
-
-      return () => clearTimeout(timeout);
-    }
-  }, [turn]);
-
-  // checks if the all pairs were already found and finishes the game if they were
-  // useEffect(() => {
-  //   const undiscoveredFields = board.filter(
-  //     (field) => field.status === "active"
-  //   );
-
-  //   console.log(board);
-  //   console.log(undiscoveredFields);
-
-  //   if (undiscoveredFields.length === 0 && gameStatus === "running") {
-  //     setGameStatus("finished");
-  //     setShowOverlay(true);
-  //     setOverlayContent(
-  //       <StartWindow
-  //         setSettings={setSettings}
-  //         setShowOverlay={setShowOverlay}
-  //         startGame={startGame}
-  //         hideBackBtn
-  //       />
-  //     );
-  //   }
-  // }, [board]);
-
   // function which starts the game with the given settings
   function startGame(settings: settings) {
     const board = generateBoard(settings.theme, settings.boardSize);
@@ -112,6 +78,32 @@ const Gamepage = () => {
     setShowOverlay(true);
   }
 
+  // checks for match after each turn state change
+  useEffect(() => {
+    if (turn.firstActiveField !== null && turn.secondActiveField !== null) {
+      const timeout = setTimeout(() => {
+        checkMatch(board, turn, players, setBoard, setTurn, setPlayers);
+      }, 3000);
+
+      return () => clearTimeout(timeout);
+    }
+  }, [turn]);
+
+  // checks if the all pairs were already found and finishes the game if they were
+  useEffect(() => {
+    const undiscoveredFields = board.filter(
+      (field) => field.status === "undiscovered"
+    );
+
+    if (undiscoveredFields.length < 1 && board.length > 0) {
+      setGameStatus("finished");
+      const timeout = setTimeout(() => {
+        displayStartWindow();
+      }, 5000);
+      return () => clearTimeout(timeout);
+    }
+  }, [board]);
+
   if (gameStatus === "not-started") {
     return (
       <div className={`${styles.layout} ${styles["game-start"]}`}>
@@ -140,7 +132,7 @@ const Gamepage = () => {
       <Gameboard
         board={board}
         fieldSize={fieldSize}
-        onFieldClick={onFieldClick}
+        onFieldClick={gameStatus === "running" ? onFieldClick : () => {}}
       />
 
       <Gamepanel players={players} activePlayer={players[turn.player]} />
