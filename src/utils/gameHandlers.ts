@@ -96,10 +96,10 @@ export function checkMatch(
         secondActiveField: null,
       };
     });
-  }
 
-  if (players.length === 1) {
-    setSoloModeMoves((prevMoves) => prevMoves + 1);
+    if (players.length === 1) {
+      setSoloModeMoves((prevMoves) => prevMoves + 1);
+    }
   }
 }
 

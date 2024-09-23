@@ -1,5 +1,5 @@
 .layout {
-  min-height: 99dvh;
+  min-height: 100dvh;
   width: min(100% - 1.5rem, 1600px);
   margin-inline: auto;
 
@@ -10,4 +10,20 @@
 
 .layout.game-start {
   grid-template-rows: 1fr;
+}
+body:has(.layout.game-start) {
+  background-color: var(--color-dark-blue);
+}
+
+.game-start-window {
+  width: min(100% - 1.5rem, 700px);
+  margin-inline: auto;
+  padding: 0.8rem;
+  border-radius: 1rem;
+  background-color: var(--color-white);
+}
+@media (min-width: 300px) {
+  .game-start-window {
+    padding: 2rem;
+  }
 }

@@ -168,12 +168,14 @@ const Gamepage = () => {
   if (gameStatus === "not-started") {
     return (
       <div className={`${styles.layout} ${styles["game-start"]}`}>
-        <StartWindow
-          setSettings={setSettings}
-          setShowOverlay={setShowOverlay}
-          startGame={startGame}
-          hideBackBtn
-        />
+        <div className={styles["game-start-window"]}>
+          <StartWindow
+            setSettings={setSettings}
+            setShowOverlay={setShowOverlay}
+            startGame={startGame}
+            hideBackBtn
+          />
+        </div>
       </div>
     );
   }
