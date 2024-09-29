@@ -72,6 +72,7 @@ const Gamepage = () => {
       }, 1000);
       return () => clearInterval(interval);
     }
+    // eslint-disable-next-line
   }, [gameStatus]);
 
   // function which starts the game with the given settings
@@ -132,6 +133,7 @@ const Gamepage = () => {
 
       return () => clearTimeout(timeout);
     }
+    // eslint-disable-next-line
   }, [turn]);
 
   // checks if the all pairs were already found and finishes the game if they were
@@ -163,6 +165,7 @@ const Gamepage = () => {
       }, 3000);
       return () => clearTimeout(timeout);
     }
+    // eslint-disable-next-line
   }, [board]);
 
   if (gameStatus === "not-started") {
