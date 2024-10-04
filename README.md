@@ -7,7 +7,7 @@
 <img align="left" alt="HTML" width="50px" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-plain.svg" />
 <img align="left" alt="CSS" width="50px" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/css3/css3-plain.svg" style="padding-right:10px;" />
 
-<br/> <br/> 
+<br/> <br/> <br/> 
 
 #### App Functionalities:
 <p>-> displaying nice and clean user interface and handling gameplay</p>
