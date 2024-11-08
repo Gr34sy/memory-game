@@ -24,10 +24,10 @@
 <br/> <br/> <br/> 
 
 #### Game rules:
-<p>Multiplayer:</p>
-<p>Each turn a player discovers two fields. Then after the short delay the app checks if they are matching. If they do so, the active player gets one point and an additional turn. Then the discovered fields become disabled and stay face-up until the end of the game. When the fields aren't  matching, the turn is passed to next player, and the fields are turned face-down again. The game ends when all of the pairs are discovered. Player with the most pairs wins. If one or more players have the same amount of pairs, the game is tied.</p>
-<p>Singleplayer:</p>
-<p>The game works similar to the multiplayer, except there are the time and moves count. One move equals to turning two fields face-up.</p>
+<p>Multiplayer:<br/>
+Each turn a player discovers two fields. Then after the short delay the app checks if they are matching. If they do so, the active player gets one point and an additional turn. Then the discovered fields become disabled and stay face-up until the end of the game. When the fields aren't  matching, the turn is passed to next player, and the fields are turned face-down again. The game ends when all of the pairs are discovered. Player with the most pairs wins. If one or more players have the same amount of pairs, the game is tied.</p>
+<p>Singleplayer: <br/>
+The game works similar to the multiplayer, except there are the time and moves count. One move equals to turning two fields face-up.</p>
 
 
 
